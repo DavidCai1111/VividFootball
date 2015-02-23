@@ -3,6 +3,26 @@ extends layout
 block content
   h2.text-center.bg-success 球赛爬爬
 
+  div.text-center.container
+    a.col-md-3(href="/rank/England") 英超
+    a.bcol-md-3(href="/rank/France") 法甲
+    a.col-md-3(href="/rank/Italy") 意甲
+    a.col-md-3(href="/rank/Germany") 德甲
+
+  br
+
+  h5 获取时间: #{updateAt}(每十秒实时更新) &nbsp;
+    a#refresh.btn.btn-primary 刷新
+
+  form.form-inline(method="post",action="/mail/subscribe")
+    .form-group
+      label.col-md-3.control-label(for="email") 邮箱订阅:
+      .col-md-9
+        input.form-control(type="email",name="email",placeholder="邮箱地址")
+    button.btn.btn-primary(type='submit') 提交
+
+  br
+
   table.table.table-striped.table-bordered
     thead
       td 排名
