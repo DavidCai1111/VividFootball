@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h2.text-center.bg-success 球赛爬爬
+
+  table.table.table-striped.table-bordered
+    thead
+      td 排名
+      td 球队名
+      td 场次
+      td 胜
+      td 平
+      td 负
+      td 进球
+      td 失球
+      td 净胜球
+      td 场均进球
+      td 场均失球
+      td 场均净胜
+      td 场均积分
+      td 积分
+    each team,index in rank
+      tr
+        td #{team[0]}
+        td #{team[2]}
+        td #{team[3]}
+        td #{team[4]}
+        td #{team[5]}
+        td #{team[6]}
+        td #{team[7]}
+        td #{team[8]}
+        td #{team[9]}
+        td #{team[10]}
+        td #{team[11]}
+        td #{team[12]}
+        td #{team[13]}
+        td #{team[14]}
