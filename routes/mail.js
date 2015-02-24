@@ -1,7 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var mailService = require('../service/mailService');
 
-router.post('/mail/subscribe',function(req,res,next){
-    console.log("get mail address: " + req.params.email);
-    res.end("get mail address: " + req.params.email);
+router.post('/subscribe',function(req,res,next){
+    var reqBody = req.body;
+    console.log("get mail address: " + reqBody.email);
+    mailService.sendHelloMail(reqBody.email);
+    res.end("sent mail: " + reqBody.email);
 });
+
+module.exports = router;

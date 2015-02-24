@@ -27,3 +27,5 @@ mailService.sendHelloMail = function (emailAddressTo) {
     });
 
 }
+
+module.exports = mailService;
