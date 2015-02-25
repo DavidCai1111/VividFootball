@@ -12,4 +12,21 @@ $(function(){
         location.reload();
     }
 
+    //邮件订阅
+    $("#submitEmail").click(function(e){
+        e.preventDefault();
+        email = $("#email").val();
+        $.ajax({
+            type:"POST",
+            url:"/mail/subscribe",
+            data: JSON.stringify(email),
+            dataType:"json",
+            success:function(msg){
+                if(msg.result){
+                    $("#subscribeInfo").text("订阅成功!").show();
+                }
+            }
+        })
+    });
+
 });

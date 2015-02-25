@@ -18,8 +18,9 @@ block content
     .form-group
       label.col-md-3.control-label(for="email") 邮箱订阅:
       .col-md-9
-        input.form-control(type="email",name="email",placeholder="邮箱地址")
-    button.btn.btn-primary(type='submit') 提交
+        input#email.form-control(type="email",name="email",placeholder="邮箱地址")
+    button#submitEmail.btn.btn-primary(type='submit') 提交
+    p#subscribeInfo.hidden 正在订阅...
 
   br
 
