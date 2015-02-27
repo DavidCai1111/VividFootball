@@ -4,13 +4,13 @@ $(function(){
         refresh();
     });
 
-    //定时刷新
-    setInterval(refresh,10000);
-
-    //刷新页面
-    function refresh (){
-        location.reload();
-    }
+    ////定时刷新
+    ////setInterval(refresh,10000);
+    //
+    ////刷新页面
+    //function refresh (){
+    //    location.reload();
+    //}
 
     //邮件订阅
     $("#submitEmail").click(function(e){

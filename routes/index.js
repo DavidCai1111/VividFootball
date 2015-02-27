@@ -9,12 +9,12 @@ router.get('/', function(req, res, next) {
     var eventproxy = new Eventproxy();
 
     eventproxy.all('rankGet',function(rankGet){
-        console.log("rank: " + rankGet);
         //等待获取到排名信息
         res.render('index', {
             title: '球赛爬爬',
             rank:rankGet,
-            updateAt:new Date()
+            updateAt:new Date(),
+            rankJsoned: JSON.stringify(rankGet)
         });
     });
 
@@ -28,11 +28,13 @@ router.get('/rank/:league', function(req, res, next) {
     var eventproxy = new Eventproxy();
 
     eventproxy.all('rankGet',function(rankGet){
+        console.log(JSON.stringify({a:1,b:2}));
         //等待获取到排名信息
         res.render('index', {
             title: '球赛爬爬',
             rank:rankGet,
-            updateAt:new Date()
+            updateAt:new Date(),
+            rankJsoned: JSON.stringify(rankGet)
         });
     });
 

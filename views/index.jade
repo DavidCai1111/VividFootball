@@ -11,20 +11,33 @@ block content
     a.col-md-2(href="/rank/Spain") 西甲
   br
 
-  h5 获取时间: #{updateAt}(每十秒实时更新) &nbsp;
+  h5 获取时间: #{updateAt} &nbsp;
     a#refresh.btn.btn-primary 刷新
 
-  form.form-inline(method="post",action="/mail/subscribe")
-    .form-group
-      label.col-md-3.control-label(for="email") 邮箱订阅:
-      .col-md-9
-        input#email.form-control(type="email",name="email",placeholder="邮箱地址")
-    button#submitEmail.btn.btn-primary(type='submit') 提交
-    p#subscribeInfo.hidden 正在订阅...
+  hr
+
+  p#rankJsoned.hidden #{rankJsoned}
+
+  #intePerGame(style="height:500px;width:600px;display:inline-block;margin-right:15px;margin-bottom:15px")
+  #goals(style="height:500px;width:600px;display:inline-block;margin-bottom:15px")
+
+  hr
+
+  #winLostDraw(style="height:500px;width:600px;display:inline-block;margin-right:15px;margin-bottom:15px")
+  #diffGoalPerinte(style="height:500px;width:600px;display:inline-block;margin-bottom:15px")
+
+
+  //form.form-inline(method="post",action="/mail/subscribe")
+  //  .form-group
+  //    label.col-md-3.control-label(for="email") 邮箱订阅:
+  //    .col-md-9
+  //      input#email.form-control(type="email",name="email",placeholder="邮箱地址")
+  //  button#submitEmail.btn.btn-primary(type='submit') 提交
+  //  p#subscribeInfo.hidden 正在订阅...
 
   br
 
-  table.table.table-striped.table-bordered
+  table#rankTable.table.table-striped.table-bordered.hidden
     thead
       td 排名
       td 球队名
@@ -56,3 +69,29 @@ block content
         td #{team[12]}
         td #{team[13]}
         td #{team[14]}
+  script(type='text/javascript',src='/javascripts/echarts/echarts.js')
+  script.
+    var namesOfTeams = [];//各球队名字
+    var goalsPerTeam = [];//各球队进球数
+    var fumblePerTeam = [];//各球队失球数
+    var goalDifferencePerTeam = [];//各球队净胜球数
+    var intePerGame = [];//各球队场均积分
+    var lostPerTeam = [];//各球队负场数
+    var drawPerTeam = [];//各球队平局数
+    var winPerTeam = [];//各球队胜场数
+    var diffGoalPerinte = [];//各球队每净胜球获得积分
+    var rank = JSON.parse($("#rankJsoned").text());
+    for(var i = 0 ; i < rank.length ; i++){
+      namesOfTeams.push(rank[i][2]);
+      goalsPerTeam.push(rank[i][7]);
+      fumblePerTeam.push(rank[i][8]);
+      lostPerTeam.push(rank[i][6]);
+      drawPerTeam.push(rank[i][5]);
+      winPerTeam.push(rank[i][4]);
+      goalDifferencePerTeam.push({value:rank[i][9],name:rank[i][2]});
+      diffGoalPerinte.push((Math.round((parseInt(rank[i][14])/parseInt(rank[i][9]))*100)/100));
+      intePerGame.push({value:rank[i][13],name:rank[i][2]});
+    }
+    console.log(diffGoalPerinte);
+
+  script(type='text/javascript',src='/javascripts/charts.js')
