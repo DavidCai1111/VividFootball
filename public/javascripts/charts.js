@@ -217,7 +217,7 @@ require(
 
         option = {
             title: {
-                text: '每净胜球获得积分',
+                text: '每积分需要净胜球',
                 subtext: '各球队分布'
             },
             tooltip : {
@@ -259,7 +259,7 @@ require(
             ],
             series : [
                 {
-                    name:'每净胜球获得积分',
+                    name:'每积分需要净胜球',
                     type:'bar',
                     stack: '总量',
                     itemStyle : { normal: {

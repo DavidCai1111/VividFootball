@@ -16,15 +16,14 @@ block content
 
   hr
 
+  .container
+    .row
+      #intePerGame.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+      #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+      #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
+      #diffGoalPerinte.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+
   p#rankJsoned.hidden #{rankJsoned}
-
-  #intePerGame(style="height:500px;width:600px;display:inline-block;margin-right:15px;margin-bottom:15px")
-  #goals(style="height:500px;width:600px;display:inline-block;margin-bottom:15px")
-
-  hr
-
-  #winLostDraw(style="height:500px;width:600px;display:inline-block;margin-right:15px;margin-bottom:15px")
-  #diffGoalPerinte(style="height:500px;width:600px;display:inline-block;margin-bottom:15px")
 
 
   //form.form-inline(method="post",action="/mail/subscribe")
@@ -89,7 +88,7 @@ block content
       drawPerTeam.push(rank[i][5]);
       winPerTeam.push(rank[i][4]);
       goalDifferencePerTeam.push({value:rank[i][9],name:rank[i][2]});
-      diffGoalPerinte.push((Math.round((parseInt(rank[i][14])/parseInt(rank[i][9]))*100)/100));
+      diffGoalPerinte.push((Math.round((parseInt(rank[i][9])/parseInt(rank[i][14]))*1000)/1000));
       intePerGame.push({value:rank[i][13],name:rank[i][2]});
     }
     console.log(diffGoalPerinte);
