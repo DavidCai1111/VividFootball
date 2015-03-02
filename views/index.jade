@@ -24,6 +24,7 @@ block content
       #diffGoalPerinte.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
       #Top4Scorers.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
       #positonsOfTop30Scorers.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+      #penaltyInGoals.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
 
   p#rankJsoned.hidden #{rankJsoned}
   p#scorersJsoned.hidden #{scorersJsoned}
@@ -83,7 +84,8 @@ block content
     var diffGoalPerinte = [];//各球队每净胜球获得积分
     var namesOfScorers = [];//射手榜球员名
     var goalsPerScorer = [];//射手榜各球员进球数
-    var positonsAndNamesOfPerScorer = [];
+    var positonsAndNamesOfPerScorer = [];//射手榜球员场上位置
+    var penaltyPerScorer = [];
     var rank = JSON.parse($("#rankJsoned").text());
     var scorers = JSON.parse($("#scorersJsoned").text());
     for(var i = 0 ; i < rank.length ; i++){
@@ -102,7 +104,7 @@ block content
       namesOfScorers.push(scorers[j][1].trim());
       goalsPerScorer.push(scorers[j][5]);
       positonsAndNamesOfPerScorer.push({name:scorers[j][1].trim(),position:scorers[j][4]});
+      penaltyPerScorer.push(scorers[j][6]);
     }
-    console.log(positonsAndNamesOfPerScorer);
 
   script(type='text/javascript',src='/javascripts/charts.js')

@@ -358,7 +358,7 @@ require(
                             color:'rgba(0,0,0,0)'
                         }
                     },
-                    data:[0, 20, 18, 15, 10, 0]
+                    data:[0, 0, 0, 0, 0, 0]
                 },
                 {
                     name:'进球数',
@@ -384,7 +384,7 @@ require(
     }
 );
 
-//射手榜TOP20,场上位置
+//射手榜TOP30,场上位置
 require(
     [
         'echarts',
@@ -465,6 +465,86 @@ require(
                 }
             ]
         };
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+);
+
+//射手榜TOP10进球中的点球数
+require(
+    [
+        'echarts',
+        'echarts/chart/line'
+    ],
+    function (ec) {
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = ec.init(document.getElementById('penaltyInGoals'));
+
+        option = {
+            title : {
+                text: 'Top5射手，进球数&点球数',
+                x:'left',
+                y:'top'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['进球数(无点球)','点球数'],
+                x:'right',
+                y:'bottom'
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: true},
+                    magicType : {show: true, type: ['line',  'stack', 'tiled']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : (function(){
+                        var _namesOfScorers = namesOfScorers.slice(0,5);
+                        return _namesOfScorers;
+                    }())
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'进球数(无点球)',
+                    type:'line',
+                    stack: '总量',
+                    data:(function(){
+                        var _goalsPerScorer = [];
+                        for(var i = 0 ; i < 5 ; i ++){
+                            _goalsPerScorer.push(parseInt(goalsPerScorer[i]-penaltyPerScorer[i]));
+                        }
+                        return _goalsPerScorer;
+                    }())
+                },
+                {
+                    name:'点球数',
+                    type:'line',
+                    stack: '总量',
+                    data:(function(){
+                        var _penaltyPerScorer = penaltyPerScorer.slice(0,5);
+                        return _penaltyPerScorer;
+                    }())
+                }
+            ]
+        };
+
         // 为echarts对象加载数据
         myChart.setOption(option);
     }
