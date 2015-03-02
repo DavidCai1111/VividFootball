@@ -170,7 +170,7 @@ require(
             yAxis : [
                 {
                     type : 'category',
-                    data : namesOfTeams.reverse()
+                    data : namesOfTeams
                 }
             ],
             series : [
@@ -230,8 +230,8 @@ require(
                 show : true,
                 feature : {
                     mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
+                    dataView : {show: true, readOnly: true},
+                    magicType : {show: true, type: [ 'bar']},
                     restore : {show: true},
                     saveAsImage : {show: true}
                 }
@@ -244,7 +244,7 @@ require(
                 {
                     type : 'value',
                     position: 'top',
-                    splitLine: {lineStyle:{type:'dashed'}},
+                    splitLine: {lineStyle:{type:'dashed'}}
                 }
             ],
             yAxis : [
@@ -293,3 +293,179 @@ require(
     }
 );
 
+//射手榜TOP4
+require(
+    [
+        'echarts',
+        'echarts/chart/bar' //按需加载
+    ],
+    function (ec) {
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = ec.init(document.getElementById('Top4Scorers'));
+
+        option = {
+            title: {
+                text: '射手榜TOP4',
+                subtext: '以及他们进球总量'
+            },
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                },
+                formatter: function (params) {
+                    var tar = params[0];
+                    return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+                }
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: true},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    splitLine: {show:false},
+                    data : (function(){
+                        var _namesOfScorers = namesOfScorers.slice(0,4);
+                        _namesOfScorers.unshift("总进球数");
+                        return _namesOfScorers;
+                    }())
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'辅助',
+                    type:'bar',
+                    stack: '总量',
+                    itemStyle:{
+                        normal:{
+                            barBorderColor:'rgba(0,0,0,0)',
+                            color:'rgba(0,0,0,0)'
+                        },
+                        emphasis:{
+                            barBorderColor:'rgba(0,0,0,0)',
+                            color:'rgba(0,0,0,0)'
+                        }
+                    },
+                    data:[0, 20, 18, 15, 10, 0]
+                },
+                {
+                    name:'进球数',
+                    type:'bar',
+                    stack: '总量',
+                    itemStyle : { normal: {label : {show: true, position: 'inside'}}},
+                    data:(function(){
+                        var _total = 0;
+                        for(var i = 0 ; i < 4 ; i++){
+                            _total += parseInt(goalsPerScorer[i]);
+                        }
+                        var _goalsPerScorer = goalsPerScorer.slice(0,4);
+                        _goalsPerScorer.unshift(_total);
+                        return _goalsPerScorer;
+                    }())
+                }
+            ]
+        };
+
+
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+);
+
+//射手榜TOP20,场上位置
+require(
+    [
+        'echarts',
+        'echarts/chart/chord' //按需加载
+    ],
+    function (ec) {
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = ec.init(document.getElementById('positonsOfTop30Scorers'));
+
+        option = option = {
+            title : {
+                text: '射手榜TOP30场上位置',
+                x:'left',
+                y:'top'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: function (params) {
+                    if (params.indicator2) {    // is edge
+                        return params.indicator2 + ' ' + params.name + ' ' + params.indicator;
+                    } else {    // is node
+                        return params.name
+                    }
+                }
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    restore : {show: true},
+                    magicType: {show: true, type: ['chord']},
+                    saveAsImage : {show: true}
+                }
+            },
+            legend: {
+                x: 'right',
+                y:'bottom',
+                data:['前锋', '中场', '后卫']
+            },
+            series : [
+                {
+                    name: '射手榜TOP30场上位置',
+                    type:'chord',
+                    sort : 'ascending',
+                    sortSub : 'descending',
+                    ribbonType: false,
+                    radius: '60%',
+                    itemStyle : {
+                        normal : {
+                            label : {
+                                rotate : true
+                            }
+                        }
+                    },
+                    minRadius: 7,
+                    maxRadius: 20,
+                    // 使用 nodes links 表达和弦图
+                    nodes: (function(){
+                        var _namesOfScorers = namesOfScorers.slice(0,29);
+                        for(var i = 0; i < _namesOfScorers.length ; i++ ){
+                            if(i === 0){
+                                _namesOfScorers[i] = {name:_namesOfScorers[i], symbol: 'star'};
+                            }else{
+                                _namesOfScorers[i] = {name:_namesOfScorers[i]};
+                            }
+                        }
+                        _namesOfScorers.push({name:'前锋'});
+                        _namesOfScorers.push({name:'中场'});
+                        _namesOfScorers.push({name:'后卫'});
+                        return _namesOfScorers;
+                    }()),
+                    links: (function(){
+                        var _positonsAndNamesOfPerScorer = positonsAndNamesOfPerScorer.slice(0,29);
+                        for(var i = 0 ; i < _positonsAndNamesOfPerScorer.length ; i ++){
+                            _positonsAndNamesOfPerScorer[i] = {source:_positonsAndNamesOfPerScorer[i].position,target:_positonsAndNamesOfPerScorer[i].name, weight: 1, name: '位置是'}
+                        }
+                        return _positonsAndNamesOfPerScorer;
+                    }())
+                }
+            ]
+        };
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+);

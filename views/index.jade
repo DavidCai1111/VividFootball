@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h2.text-center.bg-success 球赛爬爬
+  h2.text-center 球赛爬爬
 
   div.text-center.container
     a.col-md-2(href="/rank/England") 英超
@@ -22,9 +22,11 @@ block content
       #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
       #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
       #diffGoalPerinte.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+      #Top4Scorers.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
+      #positonsOfTop30Scorers.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
 
   p#rankJsoned.hidden #{rankJsoned}
-
+  p#scorersJsoned.hidden #{scorersJsoned}
 
   //form.form-inline(method="post",action="/mail/subscribe")
   //  .form-group
@@ -79,7 +81,11 @@ block content
     var drawPerTeam = [];//各球队平局数
     var winPerTeam = [];//各球队胜场数
     var diffGoalPerinte = [];//各球队每净胜球获得积分
+    var namesOfScorers = [];//射手榜球员名
+    var goalsPerScorer = [];//射手榜各球员进球数
+    var positonsAndNamesOfPerScorer = [];
     var rank = JSON.parse($("#rankJsoned").text());
+    var scorers = JSON.parse($("#scorersJsoned").text());
     for(var i = 0 ; i < rank.length ; i++){
       namesOfTeams.push(rank[i][2]);
       goalsPerTeam.push(rank[i][7]);
@@ -91,6 +97,12 @@ block content
       diffGoalPerinte.push((Math.round((parseInt(rank[i][9])/parseInt(rank[i][14]))*1000)/1000));
       intePerGame.push({value:rank[i][13],name:rank[i][2]});
     }
-    console.log(diffGoalPerinte);
+    console.log(scorers);
+    for(var j = 1 ; j < scorers.length ; j ++){
+      namesOfScorers.push(scorers[j][1].trim());
+      goalsPerScorer.push(scorers[j][5]);
+      positonsAndNamesOfPerScorer.push({name:scorers[j][1].trim(),position:scorers[j][4]});
+    }
+    console.log(positonsAndNamesOfPerScorer);
 
   script(type='text/javascript',src='/javascripts/charts.js')
