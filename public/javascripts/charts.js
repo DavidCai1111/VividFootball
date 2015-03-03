@@ -549,3 +549,108 @@ require(
         myChart.setOption(option);
     }
 );
+
+//射手榜TOP10球员效力球队
+require(
+    [
+        'echarts',
+        'echarts/chart/chord'
+    ],
+    function (ec) {
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = ec.init(document.getElementById('Top10ScorersTeams'));
+
+        option = {
+            title : {
+                text: 'Top10射手效力球队',
+                x:'left',
+                y:'top'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: function (params) {
+                    if (params.indicator2) {    // is edge
+                        return params.indicator2 + ' ' + params.name + ' ' + params.indicator;
+                    } else {    // is node
+                        return params.name
+                    }
+                }
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    restore : {show: true},
+                    magicType: {show: true, type: [ 'chord']},
+                    saveAsImage : {show: true}
+                }
+            },
+            legend: {
+                x: 'right',
+                y:'bottom',
+                data:(function(){
+                    var _teamOfScorer = [];
+                    for(var i = 0 ; i < 10 ; i++){
+                        if(_teamOfScorer.indexOf(teamOfScorer[i]) === -1){
+                            _teamOfScorer.push(teamOfScorer[i]);
+                        }
+                    }
+
+                    return _teamOfScorer;
+                }())
+            },
+            series : [
+                {
+                    type:'chord',
+                    sort : 'ascending',
+                    sortSub : 'descending',
+                    showScale : false,
+                    itemStyle : {
+                        normal : {
+                            label : {
+                                rotate : true
+                            }
+                        }
+                    },
+                    // 使用 nodes links 表达和弦图
+                    nodes: (function(){
+                        var _teamOfScorer = [];
+                        var _namesAndTeams = [];
+
+                        for (var i = 0; i < 10; i++) {
+                            if(_teamOfScorer.indexOf(teamOfScorer[i]) === -1){
+                                _teamOfScorer.push(teamOfScorer[i]);
+                            }
+                        }
+
+                        _namesAndTeams =namesOfScorers.slice(0,10);
+
+                        for(var k = 0 ; k < _namesAndTeams.length ; k++){
+                            _namesAndTeams[k] = { name:_namesAndTeams[k] };
+                        }
+
+                        for(var j = 0 ; j < _teamOfScorer.length ; j ++){
+                            _namesAndTeams.push({name: _teamOfScorer[j]});
+                        }
+
+                        return _namesAndTeams;
+                    }()),
+                    links: (function(){
+                        var _namesOfScorers = namesOfScorers.slice(0,10);
+                        var __namesOfScorers = namesOfScorers.slice(0,10);
+                        for(var i = 0 ; i < _namesOfScorers.length ; i ++){
+                            _namesOfScorers[i] = {source:teamOfScorer[i],target:_namesOfScorers[i], weight: 0.9, name: '效力'};
+                        }
+                        for (var j = 0; j < __namesOfScorers.length; j++) {
+                            _namesOfScorers.push({source:__namesOfScorers[j],target:teamOfScorer[j], weight: 1});
+                        }
+                        return _namesOfScorers;
+                    }())
+                }
+            ]
+        };
+
+
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+);

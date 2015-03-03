@@ -25,7 +25,7 @@ block content
       #Top4Scorers.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
       #positonsOfTop30Scorers.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
       #penaltyInGoals.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
-
+      #Top10ScorersTeams.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
   p#rankJsoned.hidden #{rankJsoned}
   p#scorersJsoned.hidden #{scorersJsoned}
 
@@ -85,7 +85,8 @@ block content
     var namesOfScorers = [];//射手榜球员名
     var goalsPerScorer = [];//射手榜各球员进球数
     var positonsAndNamesOfPerScorer = [];//射手榜球员场上位置
-    var penaltyPerScorer = [];
+    var penaltyPerScorer = [];//射手榜球员点球数
+    var teamOfScorer = [];//射手榜球员球队
     var rank = JSON.parse($("#rankJsoned").text());
     var scorers = JSON.parse($("#scorersJsoned").text());
     for(var i = 0 ; i < rank.length ; i++){
@@ -99,12 +100,13 @@ block content
       diffGoalPerinte.push((Math.round((parseInt(rank[i][9])/parseInt(rank[i][14]))*1000)/1000));
       intePerGame.push({value:rank[i][13],name:rank[i][2]});
     }
-    console.log(scorers);
     for(var j = 1 ; j < scorers.length ; j ++){
       namesOfScorers.push(scorers[j][1].trim());
       goalsPerScorer.push(scorers[j][5]);
       positonsAndNamesOfPerScorer.push({name:scorers[j][1].trim(),position:scorers[j][4]});
       penaltyPerScorer.push(scorers[j][6]);
+      teamOfScorer.push(scorers[j][3].trim());
     }
 
   script(type='text/javascript',src='/javascripts/charts.js')
+
