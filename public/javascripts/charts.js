@@ -638,7 +638,7 @@ require(
                         var _namesOfScorers = namesOfScorers.slice(0,10);
                         var __namesOfScorers = namesOfScorers.slice(0,10);
                         for(var i = 0 ; i < _namesOfScorers.length ; i ++){
-                            _namesOfScorers[i] = {source:teamOfScorer[i],target:_namesOfScorers[i], weight: 0.9, name: '效力'};
+                            _namesOfScorers[i] = {source:teamOfScorer[i],target:_namesOfScorers[i], weight: 0.9, name: '球员'};
                         }
                         for (var j = 0; j < __namesOfScorers.length; j++) {
                             _namesOfScorers.push({source:__namesOfScorers[j],target:teamOfScorer[j], weight: 1});
