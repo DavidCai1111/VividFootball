@@ -14,6 +14,15 @@ block content
   h5 获取时间: #{updateAt} &nbsp;
     a#refresh.btn.btn-primary 刷新
 
+  form.form-inline(method="post",action="/mail/subscribe").container.pull-left
+    .form-group.row
+      label.control-label(for="email") 发送此联赛积分榜至邮箱 :
+
+        input#email.form-control(type="email",name="email",placeholder="邮箱地址")
+        span &nbsp;&nbsp;
+        button#submitEmail.btn.btn-primary(type='submit') 提交
+        span#subscribeInfo 发送中...
+
   hr
 
   .container
@@ -28,14 +37,6 @@ block content
       #Top10ScorersTeams.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
   p#rankJsoned.hidden #{rankJsoned}
   p#scorersJsoned.hidden #{scorersJsoned}
-
-  //form.form-inline(method="post",action="/mail/subscribe")
-  //  .form-group
-  //    label.col-md-3.control-label(for="email") 邮箱订阅:
-  //    .col-md-9
-  //      input#email.form-control(type="email",name="email",placeholder="邮箱地址")
-  //  button#submitEmail.btn.btn-primary(type='submit') 提交
-  //  p#subscribeInfo.hidden 正在订阅...
 
   br
 
