@@ -14,11 +14,11 @@ http://123.57.73.34:3001
     |-- 安装依赖
         |-- npm install
   	    
-    |-- 配置 config/mailConfig.js 中邮件发送者相关信息（默认为163邮箱）
+    |-- 配置 config/mailConfig.js 
+        |-- 邮件发送者相关信息（默认为163邮箱）
    
-
     |-- 部署
-  	|-- 目录下：forever ./bin/www
+        |-- 目录下：forever ./bin/www
 
 ###3，运行
   	|-- Superagent 爬取五大联赛相关球队，射手榜数据
