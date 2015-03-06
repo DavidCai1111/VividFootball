@@ -14,7 +14,8 @@ http://123.57.73.34:3001
     |-- 安装依赖
         |-- npm install
   	    
-    |-- 配置 config/mailConfig.js 中邮件发送者相关信息（默认为163邮箱）    
+    |-- 配置 config/mailConfig.js 中邮件发送者相关信息（默认为163邮箱）
+   
 
     |-- 部署
   	|-- 目录下：forever ./bin/www
