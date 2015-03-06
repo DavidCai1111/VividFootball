@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
     var eventproxy = new Eventproxy();
 
     eventproxy.all('rankGet','scorerGet',function(rankGet,scorerGet){
-        console.log(scorerGet);
         //等待获取到排名信息
         res.render('index', {
             title: '球赛爬爬',
@@ -35,7 +34,6 @@ router.get('/rank/:league', function(req, res, next) {
     var eventproxy = new Eventproxy();
 
     eventproxy.all('rankGet','scorerGet',function(rankGet,scorerGet){
-        console.log(scorerGet);
         //等待获取到排名信息
         res.render('index', {
             title: '球赛爬爬',
