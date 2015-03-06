@@ -5,7 +5,7 @@ var util = require('util');
 var mailService = {};
 
 var transporter = nodeMailer.createTransport({
-    host: 'smtp.163.com',
+    host: account.host,
     secureConnection:true,
     auth:{
         user: account.username,
