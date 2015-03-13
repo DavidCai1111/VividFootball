@@ -11,7 +11,7 @@ router.post('/subscribe/rank/:league',function(req,res,next){
 
     if(!isEmail(reqBody.email)){
         res.send({
-            result:false,
+            result:false
         });
     }
 
@@ -19,7 +19,6 @@ router.post('/subscribe/rank/:league',function(req,res,next){
 
     eventproxy.all('rankGet',function(rankGet){
 
-        console.log("rankGet: " + rankGet[0][2]);
         mailService.sendHelloMail(reqBody.email,rankGet,function(err,info){
             if(err){
                 res.send({
