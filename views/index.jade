@@ -25,8 +25,15 @@ block content
 
   hr
 
+
+
   .container
     .row
+      .progressBar.col-md-12
+        hr
+        h5 努力获取中：
+        #progressbar
+        hr
       #intePerGame.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
       #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
       #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
@@ -74,6 +81,9 @@ block content
         td #{team[14]}
   script(type='text/javascript',src='/javascripts/echarts/echarts.js')
   script.
+
+    $("#progressbar").progressbar({value: 37});
+
     var namesOfTeams = [];//各球队名字
     var goalsPerTeam = [];//各球队进球数
     var fumblePerTeam = [];//各球队失球数
