@@ -34,7 +34,7 @@ block content
         h5 努力获取中：
         #progressbar
         hr
-      .dataContent
+      .dataContent.invisible
         #intePerGame.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
         #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
         #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
@@ -88,7 +88,9 @@ block content
     $("#progressbar").progressbar({value: 0});
 
     $("#progressbar").progressbar({complete: function () {
-      $(".progressBar").fadeOut("slow","linear");
+      $(".progressBar").fadeOut("slow","linear",function(){
+        $(".dataContent").removeClass("invisible ");
+      });
     }});
 
     socket.on('getInfo',function(){
