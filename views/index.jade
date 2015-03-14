@@ -34,7 +34,7 @@ block content
         h5 努力获取中：
         #progressbar
         hr
-      .dataContent.invisible
+      .dataContent(style="opacity:0")
         #intePerGame.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
         #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
         #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
@@ -83,19 +83,19 @@ block content
   script(type='text/javascript',src='/javascripts/echarts/echarts.js')
   script.
 
-    var socket = io.connect("http://localhost:3000");
+    var socket = io.connect("http://?:?");
 
     $("#progressbar").progressbar({value: 0});
 
     $("#progressbar").progressbar({complete: function () {
-      $(".progressBar").fadeOut("slow","linear",function(){
-        $(".dataContent").removeClass("invisible ");
+      $(".progressBar").fadeOut("slow",function(){
+        $(".dataContent").animate({opacity:1});
       });
     }});
 
     socket.on('getInfo',function(){
       var newValue = parseInt($("#progressbar").progressbar("value")) + 50;
-      $("#progressbar").progressbar({value: newValue});
+      $("#progressbar").progressbar("option","value", newValue);
     });
 
     var namesOfTeams = [];//各球队名字
