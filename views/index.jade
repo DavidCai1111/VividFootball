@@ -34,14 +34,15 @@ block content
         h5 努力获取中：
         #progressbar
         hr
-      #intePerGame.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
-      #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
-      #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
-      #diffGoalPerinte.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
-      #Top4Scorers.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
-      #positonsOfTop30Scorers.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
-      #penaltyInGoals.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
-      #Top10ScorersTeams.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+      .dataContent
+        #intePerGame.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+        #goals.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+        #winLostDraw.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
+        #diffGoalPerinte.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+        #Top4Scorers.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
+        #positonsOfTop30Scorers.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
+        #penaltyInGoals.col-md-6(style="height:500px;display:inline-block:15px;margin-bottom:15px")
+        #Top10ScorersTeams.col-md-6(style="height:500px;display:inline-block;margin-bottom:15px")
   p#rankJsoned.hidden #{rankJsoned}
   p#scorersJsoned.hidden #{scorersJsoned}
 
@@ -82,7 +83,18 @@ block content
   script(type='text/javascript',src='/javascripts/echarts/echarts.js')
   script.
 
-    $("#progressbar").progressbar({value: 37});
+    var socket = io.connect("http://localhost:3000");
+
+    $("#progressbar").progressbar({value: 0});
+
+    $("#progressbar").progressbar({complete: function () {
+      $(".progressBar").fadeOut("slow","linear");
+    }});
+
+    socket.on('getInfo',function(){
+      var newValue = parseInt($("#progressbar").progressbar("value")) + 50;
+      $("#progressbar").progressbar({value: newValue});
+    });
 
     var namesOfTeams = [];//各球队名字
     var goalsPerTeam = [];//各球队进球数

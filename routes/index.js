@@ -22,6 +22,18 @@ router.get('/', function(req, res, next) {
         });
     });
 
+    eventproxy.all('rankGet',function(){
+        res.socketio.on('connection',function(socket){
+            socket.emit('getInfo');
+        });
+    });
+
+    eventproxy.all('scorerGet',function(){
+        res.socketio.on('connection',function(socket){
+            socket.emit('getInfo');
+        });
+    });
+
     //获取英超排名
     var rank = rankService.getRank('England',eventproxy);
     var scorers = scorerService.getScorer('England',eventproxy);
@@ -42,6 +54,18 @@ router.get('/rank/:league', function(req, res, next) {
             updateAt:new Date(),
             rankJsoned: JSON.stringify(rankGet),
             scorersJsoned: JSON.stringify(scorerGet)
+        });
+    });
+
+    eventproxy.all('rankGet',function(){
+        res.socketio.on('connection',function(socket){
+            socket.emit('getInfo');
+        });
+    });
+
+    eventproxy.all('scorerGet',function() {
+        res.socketio.on('connection', function (socket) {
+            socket.emit('getInfo');
         });
     });
 
