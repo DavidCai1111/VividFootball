@@ -6,7 +6,7 @@ http://123.57.73.34:3001
 ================
 
 ###1，项目架构
-    Express + Superagent + Cheerio + Echarts
+    Express + Superagent + Cheerio + Socket.io + Echarts
 
 ###2, 项目启动
     |-- 部署至服务器
@@ -25,6 +25,8 @@ http://123.57.73.34:3001
 
   	|-- Cheerio分析爬取的HTML中DOM的结构
   	    |-- 取出相关数据
+  	    
+  	|-- 通过Socket.io进行前后端通信，得到爬取进度，并以进度条的形式在页面上展示    
 
   	|-- Echarts将所得数据图形展示
   	
