@@ -16,6 +16,7 @@ http://123.57.73.34:3001
   	    
     |-- 配置 config/mailConfig.js 
         |-- 邮件发送者相关信息（默认为163邮箱）
+    |-- 配置 index.jade 中 socket.io 链接地址    
    
     |-- 部署
         |-- 目录下：forever ./bin/www
