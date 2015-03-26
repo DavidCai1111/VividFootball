@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test":"mocha test/*"
+    "test": "mocha test/*"
   },
   "dependencies": {
     "body-parser": "~1.10.2",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-livereload": "^3.8.0",
-    "gulp-nodemon": "^1.0.5"
+    "gulp-nodemon": "^1.0.5",
+    "mocha": "^2.2.1"
   }
 }
