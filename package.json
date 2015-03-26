@@ -29,6 +29,7 @@
     "gulp": "^3.8.11",
     "gulp-livereload": "^3.8.0",
     "gulp-nodemon": "^1.0.5",
+    "istanbul": "^0.3.11",
     "mocha": "^2.2.1"
   }
 }
