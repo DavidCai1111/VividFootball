@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     eventproxy.all('rankGet','scorerGet',function(rankGet,scorerGet){
         //等待获取到排名信息
         res.render('index', {
-            title: '球赛爬爬',
+            title: '重生的积分榜射手榜！',
             rank:rankGet,
             scorer:scorerGet,
             updateAt:new Date(),
@@ -48,7 +48,7 @@ router.get('/rank/:league', function(req, res, next) {
     eventproxy.all('rankGet','scorerGet',function(rankGet,scorerGet){
         //等待获取到排名信息
         res.render('index', {
-            title: '球赛爬爬',
+            title: '重生的积分榜射手榜！',
             rank:rankGet,
             scorer:scorerGet,
             updateAt:new Date(),
