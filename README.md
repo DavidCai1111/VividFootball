@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/DavidCai1993/VividFootball.svg?branch=master)](https://travis-ci.org/DavidCai1993/VividFootball)
 
-足球相关信息爬虫
+重生的排行榜和射手榜
 http://123.57.73.34:3001
  
 ================
@@ -41,8 +41,8 @@ http://123.57.73.34:3001
 	
 	|-- Superagent + Cherrio = 绝配
 	
-	|-- 图形化展示简直可以让数据生动不止一个档次
+	|-- 图形化简直可以让数据生动不止一个档次
 	
-	|-- 准备尝试更为复杂的爬虫
+	|-- 下次尝试casper.js获取页面
 
 
