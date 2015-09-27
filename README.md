@@ -1,9 +1,9 @@
-# FootballCrawler
+# VividFootball
 
 [![Build Status](https://travis-ci.org/DavidCai1993/VividFootball.svg?branch=master)](https://travis-ci.org/DavidCai1993/VividFootball)
 
 重生的排行榜和射手榜
-http://123.57.73.34:3013
+football.fucku.singles
  
 ================
 
