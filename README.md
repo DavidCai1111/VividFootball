@@ -3,7 +3,8 @@
 [![Build Status](https://travis-ci.org/DavidCai1993/VividFootball.svg?branch=master)](https://travis-ci.org/DavidCai1993/VividFootball)
 
 重生的排行榜和射手榜
-football.fucku.singles
+
+[football.fucku.singles](http://football.fucku.singles)
  
 ================
 
